@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>img/close.png</file>
+        <file>img/error16.png</file>
+        <file>img/excel.png</file>
+        <file>img/excel16.png</file>
+    </qresource>
+</RCC>
