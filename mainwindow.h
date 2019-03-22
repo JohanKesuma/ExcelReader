@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMenuBar>
+
 #include "appmenu.h"
 #include "libbacaexcel.h"
 #include "excel.h"
@@ -24,6 +25,7 @@ private slots:
     void actionClear();
     void actionExit();
     void actionAbout();
+    void actionMinMaxNorm();
 
 private:
     int mouseX;
@@ -31,6 +33,7 @@ private:
     AppMenu *appMenu;
     Excel *tableData;
     Ui::MainWindow *ui;
+
     void initComponents();
     void initConnections();
     void createMenus();

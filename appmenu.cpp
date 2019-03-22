@@ -11,9 +11,11 @@ AppMenu::~AppMenu()
     delete actOpen;
     delete actClear;
     delete actAbout;
+    delete actMinMaxNorm;
     delete menuFile;
     delete menuEdit;
     delete menuHelp;
+    delete menuData;
     delete mainMenuBar;
 }
 
@@ -36,6 +38,16 @@ void AppMenu::setupMenu(Ui::MainWindow *ui)
     actExit->setText("Exit");
     menuFile->addAction(actExit);
     // end menu File
+
+    // add Data menu
+    menuData = new QMenu(mainMenuBar);
+    menuData->setTitle("Data");
+    mainMenuBar->addAction(menuData->menuAction());
+    // add action minmaxnorm
+    actMinMaxNorm = new QAction(ui->menuWidget);
+    actMinMaxNorm->setText("Min-Max Normalization");
+    menuData->addAction(actMinMaxNorm);
+    // end Data menu
 
     // add Edit menu
     menuEdit = new QMenu(mainMenuBar);

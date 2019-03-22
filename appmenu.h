@@ -12,11 +12,13 @@ public:
     QMenuBar *mainMenuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
+    QMenu *menuData;
     QMenu *menuHelp;
     QAction *actExit;
     QAction *actOpen;
     QAction *actClear;
     QAction *actAbout;
+    QAction *actMinMaxNorm;
     AppMenu();
     ~AppMenu();
     void setupMenu(Ui::MainWindow *ui);

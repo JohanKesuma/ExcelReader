@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "aboutdialog.h"
+#include "minmaxnormdialog.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -51,6 +52,18 @@ void MainWindow::actionAbout()
     aboutDialog.exec();
 }
 
+void MainWindow::actionMinMaxNorm()
+{
+    if (ui->excelTable->selectionModel()->hasSelection()) {
+        MinMaxNormDialog dialog(tableData->getItemModel(),
+                                ui->excelTable->selectionModel()->selectedIndexes(),
+                                this);
+        dialog.exec();
+    } else {
+        QMessageBox::warning(this, QString("..."), QString("No Selection"));
+    }
+}
+
 void MainWindow::initComponents()
 {
     // buat mmenu
@@ -58,7 +71,7 @@ void MainWindow::initComponents()
     appMenu->setupMenu(ui);
 
     // set table model
-    ui->execlTable->setModel(tableData->getItemModel());
+    ui->excelTable->setModel(tableData->getItemModel());
 }
 
 void MainWindow::initConnections()
@@ -74,6 +87,9 @@ void MainWindow::initConnections()
 
     // clicked action Clear
     connect(appMenu->actClear, SIGNAL(triggered()), this, SLOT(actionClear()));
+
+    // click action minMaxNorm
+    connect(appMenu->actMinMaxNorm, SIGNAL(triggered()), this, SLOT(actionMinMaxNorm()));
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
@@ -89,13 +105,16 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 
 void MainWindow::loadLibraries()
 {
-    QLibrary lib("lib/libBacaExcel.dll");
+    QLibrary lib("lib/libBacaExcel");
     lib.load();
     if (!lib.isLoaded()) {
-        QMessageBox::critical(this, "Error", "Couldn't load libBacaExcel.dll");
+        QMessageBox::critical(this, "Error Load", lib.errorString() + ", " + lib.fileName());
         QApplication::exit();
     } else {
+
+        qDebug() << lib.fileName();
         qDebug() << "load lib success";
+
     }
     CreateObjectInstance = (PEXCEL) lib.resolve("CreateObjectInstance");
     if (!CreateObjectInstance) {
@@ -104,4 +123,5 @@ void MainWindow::loadLibraries()
     } else {
         tableData = CreateObjectInstance();
     }
+
 }

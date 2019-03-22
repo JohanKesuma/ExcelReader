@@ -28,7 +28,8 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     aboutdialog.cpp \
-    appmenu.cpp
+    appmenu.cpp \
+    minmaxnormdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -36,11 +37,13 @@ HEADERS += \
     appmenu.h \
     libbacaexcel.h \
     libbacaexcel.h \
-    excel.h
+    excel.h \
+    minmaxnormdialog.h
 
 FORMS += \
         mainwindow.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    minmaxnormdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
